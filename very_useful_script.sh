@@ -13,18 +13,19 @@ if [[ "$1" =~ ^(-)?[0-9]+$ ]]; then
     if [[ -d /proc/$x ]]; then
         # Print the cmdline used to run the process
         cat /proc/$x/cmdline
+        echo ""
     else
         # Add 1000 to the argument and print the sum
         echo $(( $x + 1000 ))
     fi
-# Check if the argument is a .txt file
-elif [[ "$1" == *.txt ]]; then
-    # Append the current time to the end of the file
-    echo $(date) >> "$1"
 # Check if the argument is an ELF executable
 elif file "$1" | grep -q "ELF"; then
     # Print the .rodata section of the file
     readelf -x .rodata "$1"
+# Check if the argument is a .txt file
+elif [[ "$1" == *.txt ]]; then
+    # Append the current time to the end of the file
+    echo $(date) >> "$1"
 else
     echo "Invalid argument"
     exit 1
