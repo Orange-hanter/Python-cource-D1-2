@@ -8,8 +8,14 @@
 
 # Check if the argument is a number
 if [[ "$1" =~ ^(-)?[0-9]+$ ]]; then
+    if [[ "$1" =~ ^-[0-9]+$ ]]; then
+        x=$( echo $1 | sed 's/-//' )
+        x=$((10#$x))
+        x=$(($x * -1))
+    else
+        x=$((10#$x))
+    fi
     # Check if the argument is a PID of a running process
-    x=$(($1))
     if [[ -d /proc/$x ]]; then
         # Print the cmdline used to run the process
         cat /proc/$x/cmdline
