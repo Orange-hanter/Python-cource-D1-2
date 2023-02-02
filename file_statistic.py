@@ -32,10 +32,7 @@ if __name__ == '__main__':
 
     with open(path, 'rb') as file:
         if not isMemoryEnough(os.stat(path).st_size):
-            while True:
-                data = file.readline()
-                if not data:
-                    break
+            for data in file:
                 symbols_statistic(data, meta_inf)
         else:
             symbols_statistic(file.read(), meta_inf)
