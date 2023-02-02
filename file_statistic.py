@@ -6,7 +6,7 @@ import sys
 
 def isMemoryEnough(file_size_in_bites: int):
     free_memory = psutil.virtual_memory().available
-    file_size_in_MB /= 1024 * 1024
+    file_size_in_MB = file_size_in_bites / (1024 * 1024)
     modifier = 0.8
     return (free_memory * modifier) > file_size_in_MB
 
