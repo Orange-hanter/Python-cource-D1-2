@@ -3,9 +3,9 @@ from io import TextIOWrapper
 import sys
 
 
-def read_data_chunk(file_object: TextIOWrapper, chunk_size: int = 33) -> str:
+def read_data_chunk(file_object: TextIOWrapper) -> str:
     while True:
-        data = file_object.read(chunk_size)
+        data = file_object.readline()
         if not data:
             break
         else:
