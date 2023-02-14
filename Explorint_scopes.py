@@ -1,32 +1,32 @@
 # Enclosed case
-def sum(digit=None):
+def sum_enclosed(digit=None):
     acm = digit
 
-    def wrapped(sub=None):
-        if sub:
-            return sum(acm + sub)
+    def wrapped(digit=None):
+        if digit:
+            return sum_enclosed(acm + digit)
         else:
             return acm
 
-    if digit:
+    if digit is not None:
         return wrapped
     else:
         return 0
 
 
 # Nonlocal case
-def sumV2(digit=None):
+def sum_nonlocal(digit=None):
     acm = digit
 
-    def wrapped(sub=None):
+    def wrapped(digit=None):
         nonlocal acm
-        if sub:
-            acm += sub
+        if digit:
+            acm += digit
             return wrapped
         else:
             return acm
 
-    if digit:
+    if digit is not None:
         return wrapped
     else:
         return 0
@@ -36,34 +36,35 @@ def sumV2(digit=None):
 acm = 0
 
 
-def sum2(digit=None):
+def sum_global(digit=None):
     global acm
-    if digit:
+    if digit is not None:
         acm += digit
-        return sum2
+        return sum_global
     else:
         result, acm = acm, 0
         return result
 
 
 # Attributes case
-def sum3(digit=None):
-    if digit:
-        sum3.static_var += digit
-        return sum3
+def sum_attributes(digit=None):
+    if digit is not None:
+        sum_attributes.static_acm += digit
+        return sum_attributes
     else:
-        result, sum3.static_var = sum3.static_var, 0
+        result, sum_attributes.static_acm = sum_attributes.static_acm, 0
         return result
 
 
-sum3.static_var = 0
+sum_attributes.static_acm = 0
 
 
 # Test case
 if __name__ == "__main__":
-    for name, f in {"Enclosed": sum, "Nonlocal": sumV2, "Global": sum2, "Attributes": sum3}.items():
+    for name, f in {"Enclosed": sum_enclosed, "Nonlocal": sum_nonlocal, "Global": sum_global, "Attributes": sum_attributes}.items():
         print(f"{name} run:")
         print("res:", f())
+        print("res:", f(0)())
         print("res:", f(1)())
         print("res:", f(1)(2)())
         print("res:", f(1)(2)(3)())
