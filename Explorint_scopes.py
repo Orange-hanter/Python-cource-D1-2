@@ -8,7 +8,7 @@ def sum(digit=None):
         else:
             return acm
 
-    if not digit == None:
+    if digit:
         return wrapped
     else:
         return 0
@@ -26,7 +26,7 @@ def sumV2(digit=None):
         else:
             return acm
 
-    if not digit == None:
+    if digit:
         return wrapped
     else:
         return 0
