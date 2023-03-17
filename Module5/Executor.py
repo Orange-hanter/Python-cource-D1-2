@@ -1,6 +1,12 @@
 import os
 import sys
-from contextlib import redirect_stderr, redirect_stdout
+
+
+def print_stat():
+    pid = os.getpid()
+    print(f"pid:{pid}")
+    os.system("/bin/ls -l /proc/%s/fd" %pid)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -12,11 +18,12 @@ if __name__ == '__main__':
     
     child_proc_id = os.fork()
     if child_proc_id:    #Parent process
+        os.close(child_conn)
         with os.fdopen(parent_conn, 'r') as inp:
-            print("PARENT:")
             print(inp.read())
     else:
+        os.close(parent_conn)
+        os.dup2(child_conn, 0)
+        os.dup2(child_conn, 1)
         with os.fdopen(child_conn, 'w') as out:
-            with redirect_stdout(out):
-                print("CHILD:")
-                os.execve(cmd, args, cp_env)
+            os.execve(cmd, args, cp_env)
