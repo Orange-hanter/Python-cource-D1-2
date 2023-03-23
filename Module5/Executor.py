@@ -23,4 +23,5 @@ if __name__ == '__main__':
         os.close(parent_conn)
         os.dup2(child_conn, 1)
         os.dup2(child_conn, 2)
+        sys.stdin = open(os.devnull, 'r')
         os.execve(cmd, args, cp_env)
