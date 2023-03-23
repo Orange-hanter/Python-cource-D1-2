@@ -13,17 +13,14 @@ if __name__ == '__main__':
     child_proc_id = os.fork()
     if child_proc_id:  # Parent process
         os.close(child_conn)
-        parent_conn = os.fdopen(parent_conn, 'r')
-        while True:
-            data = parent_conn.readline()
-            if not data:
-                break
-            print("P:", data, end="")
-        parent_conn.close()
+        with os.fdopen(parent_conn, 'r') as my_stdout:
+            while True:
+                data = my_stdout.readline()
+                if not data: break
+                print("P:", data, end="")
 
     else:
         os.close(parent_conn)
         os.dup2(child_conn, 1)
         os.dup2(child_conn, 2)
-        sys.stdout = open(os.devnull, 'w')
         os.execve(cmd, args, cp_env)
