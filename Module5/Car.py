@@ -26,16 +26,19 @@ class Car:
         self.weight = weight
     
     def __add__(self, other) -> int:
-        print(type(other))
-        if not isinstance(other, int): raise TypeError()
-        return self.weight + other
+        if type(other) == int:
+            return self.weight + other
+        else:
+            if not type(other) == Excavator: raise TypeError()
+            return self.weight + other
+        
+    
 
-
-class Excavator(int):
+class Excavator:
     def __init__(self, weight):
         self.weight = weight
     
     def __radd__(self, other):
-        if not (type(other) == int or type(other) == Car): raise TypeError()
-        return other + self.weight
+       if not type(other) == int: raise TypeError()
+       return other + self.weight
 
