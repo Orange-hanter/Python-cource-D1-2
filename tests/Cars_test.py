@@ -24,9 +24,12 @@ class TestCars(unittest.TestCase):
     def test_type_wrang_call(self):
         with self.assertRaises(TypeError):
             111 + Car(10)
+        
         with self.assertRaises(TypeError):
             Excavator(20) + Car(10)
-
+            
+        with self.assertRaises(TypeError):
+            Excavator(20) + 10
 
 if __name__ == '__main__':
     unittest.main()
