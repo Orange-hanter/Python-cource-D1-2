@@ -1,8 +1,8 @@
 import unittest
 from Module6.Decorator import *
 
-def foo():
-    return 42
+def foo(*args, **kwargs):
+    return (*args, kwargs)
 
 @my_decorator(fun = foo)
 class Deco:
@@ -16,8 +16,9 @@ class Deco_text:
 
 class TestDecorator(unittest.TestCase):
     
-    def test_attr_callable(self):
-        self.assertEqual(Deco.fun(), foo())
+    def test_attr_static_method(self):
+        self.assertEqual(Deco.fun(), ({},))
+        self.assertEqual(Deco().fun(), ({},))
         
     def test_attr_str(self):
         self.assertEqual(Deco_text().text, "We come with peace")
