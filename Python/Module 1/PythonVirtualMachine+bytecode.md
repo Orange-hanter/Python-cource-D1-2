@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/682675/python-virtual-machine-architecture-diagrams-references

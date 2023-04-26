@@ -1,0 +1,17 @@
+- iteration protocol
+	- iterable
+	- iterators
+	- iter/next magic methods
+	- be ready to write your own iterator class.   
+- generators 
+	- generator usage and methods to interact with them (send/next/throw/close)
+	- pros/cons.   
+- list comprehension and genexp usage.   
+- itertools module overview   
+- elements of functional programming
+	- map
+	- filter
+	- reduce
+	- sorted
+	- reversed
+	- zip
