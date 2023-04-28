@@ -9,17 +9,19 @@ print a warning with module 'warnings
 """
 import warnings
 
+
 def my_decorator(**kwargs):
-    def wraper(cls:object):
+    def wraper(cls: object):
         for key, value in kwargs.items():
             if hasattr(cls, key):
                 warnings.warn(f"Attribute {key} already exists and will not be added.")
                 continue
-            if callable(value): 
+            if callable(value):
                 setattr(cls, key, staticmethod(value))
-            elif isinstance(value, str): 
-                    setattr(cls, key, value)
+            elif isinstance(value, str):
+                setattr(cls, key, value)
             else:
                 raise TypeError(f"Invalid value type for attribute {key}.")
-        return cls  
+        return cls
+
     return wraper
