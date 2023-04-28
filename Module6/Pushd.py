@@ -16,7 +16,10 @@ class Pushd:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        os.chdir(self.prev_dir)
+        if exc_type is None:
+            os.chdir(self.prev_dir)
+        else:
+            return False
 
     def __repr__(self):
         return f'Pushd({self.new_dir})'
