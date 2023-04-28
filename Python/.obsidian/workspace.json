@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "86fe7c9067c4b9ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Module 6/example.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Module 6/Topics.md",
+                "file": "Module 6/example.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Module 6/Topics.md",
+                "file": "Module 6/example.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Module 6/Topics.md"
+                "file": "Module 6/example.md"
               }
             }
           }
@@ -146,10 +159,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3d9752c631c9a364",
+  "active": "86fe7c9067c4b9ba",
   "lastOpenFiles": [
-    "Module 6/Untitled.md",
     "Module 6/Topics.md",
+    "Module 6/example.md",
+    "Module 6/Untitled.md",
     "TuserDuser/Требования.md",
     "Module 5/Topics.md",
     "Module 6",
