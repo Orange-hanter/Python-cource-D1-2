@@ -8,6 +8,7 @@ Write the python code with the following requirements to be met:
 >  d) rewrite (b) applying (c), so that decoration of function (a) with (b) preserves  
 >      original attributes described in (c), test results
 """
+import functools
 
 
 # Patr A and B
@@ -31,15 +32,10 @@ def my_sum(a: int, b: int):
 def wraps2(src_fnc):
     print("wraps2-->", id(src_fnc), src_fnc.__name__)
 
-    def ske(func):
-        setattr(func, '__annotations__', src_fnc.__annotations__)
-        setattr(func, '__doc__', src_fnc.__doc__)
-        # TODO DISCUSS
-        # for key in dir(src_fnc.__code__):
-        #    setattr(func, f'__code__.{key}', getattr(src_fnc.__code__, key))
-        return func
+    def inner(func):
+        return functools.update_wrapper(func, src_fnc, ("__doc__", "__annotations__"), ())
 
-    return ske
+    return inner
 
 
 def doubler2(func):
@@ -64,4 +60,3 @@ print('=' * 10, "Clear decorator", '=' * 10)
 help(my_sum)
 print('=' * 10, "Decorator with custom wraps", '=' * 10)
 help(my_sum2)
-
