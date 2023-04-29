@@ -9,6 +9,7 @@ Write the python code with the following requirements to be met:
 >      original attributes described in (c), test results
 """
 
+
 # Patr A and B
 
 def doubler(func):
@@ -28,9 +29,9 @@ def my_sum(a: int, b: int):
 
 # Part C
 def wraps2(src_fnc):
+    print("wraps2-->", id(src_fnc), src_fnc.__name__)
+
     def ske(func):
-        print("-->", src_fnc, src_fnc.__name__)
-        print("->", func, func.__name__)
         setattr(func, '__annotations__', src_fnc.__annotations__)
         setattr(func, '__doc__', src_fnc.__doc__)
         # TODO DISCUSS
@@ -56,7 +57,11 @@ def my_sum2(a: int, b: int) -> int:
     """
     return a + b
 
-#TEST
 
-help(my_sum2)
+# TEST
+
+print('=' * 10, "Clear decorator", '=' * 10)
 help(my_sum)
+print('=' * 10, "Decorator with custom wraps", '=' * 10)
+help(my_sum2)
+
