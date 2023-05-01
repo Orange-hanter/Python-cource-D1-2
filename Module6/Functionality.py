@@ -31,11 +31,7 @@ def my_sum(a: int, b: int):
 # Part C
 def wraps2(src_fnc):
     print("wraps2-->", id(src_fnc), src_fnc.__name__)
-
-    def inner(func):
-        return functools.update_wrapper(func, src_fnc, ("__doc__", "__annotations__"), ())
-
-    return inner
+    return lambda func: functools.update_wrapper(func, src_fnc, ("__doc__", "__annotations__"), ())
 
 
 def doubler2(func):
