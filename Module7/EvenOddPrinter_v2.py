@@ -11,11 +11,10 @@ class NumberPrinter:
         self._lock = threading.Lock()
         self._assertion = False
 
-    def print_num(self, text="", /, only_odd=True, only_even=False):
-        assert not only_odd == only_even
+    def print_num(self, text="", /, only_odd=True):
         while not self._assertion:
             with self._lock:
-                if (only_odd and self._is_index_even()) or (only_even and not self._is_index_even()):
+                if (only_odd and self._is_index_even()) or (not only_odd and not self._is_index_even()):
                     continue
                 print(self.index, text)
                 self.index += 1
@@ -28,8 +27,8 @@ class NumberPrinter:
 
 
 if __name__ == '__main__':
-    sync_printer = NumberPrinter(100, start_with=42)
-    t1 = threading.Thread(target=sync_printer.print_num, args=("",), kwargs={"only_odd": True, "only_even": False})
-    t2 = threading.Thread(target=sync_printer.print_num, args=("even",), kwargs={"only_odd": False, "only_even": True})
+    sync_printer = NumberPrinter(100, start_with=43)
+    t1 = threading.Thread(target=sync_printer.print_num, args=("",), kwargs={"only_odd": True})
+    t2 = threading.Thread(target=sync_printer.print_num, args=("even",), kwargs={"only_odd": False})
     [threading.Thread.start(obj) for obj in [t1, t2]]
     [threading.Thread.join(obj) for obj in [t1, t2]]
