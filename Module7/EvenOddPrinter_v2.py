@@ -11,7 +11,7 @@ class NumberPrinter:
         self._lock = threading.Lock()
         self._lock_your_turn = threading.Lock()
 
-    def print_num(self, text=None, /, only_odd=True):
+    def print_num(self, text="", /, only_odd=True):
         while True:
             with self._lock:
                 if only_odd != self._is_index_even():  # true in case the "even" thread try process even index
