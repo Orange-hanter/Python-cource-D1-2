@@ -10,13 +10,11 @@ class NumberPrinter:
 
         self._lock = threading.Lock()
         self._lock_your_turn = threading.Lock()
-        self._assertion = False
 
-    def print_num(self, text="", /, only_odd=True):
-        while not self._assertion:
+    def print_num(self, text=None, /, only_odd=True):
+        while True:
             with self._lock:
                 if only_odd != self._is_index_even():  # true in case the "even" thread try process even index
-                    # print(f"Have you heard of our god saver Emperor? {threading.get_ident()}")
                     self._lock_your_turn.acquire()
                 if self._lock_your_turn.locked():
                     print(self.index, text)
