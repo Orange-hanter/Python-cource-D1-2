@@ -8,29 +8,30 @@ class NumberPrinter:
         self._limit = max_num
         self.index = start_with
 
-        self._lock = threading.Lock()
-        self._lock_your_turn = threading.Lock()
+        self._lock_even = threading.Lock()
+        self._lock_odd = threading.Lock()
+        (self._lock_odd if self._is_index_even() else self._lock_even).acquire()
 
-    def print_num(self, text="", /, only_odd=True):
+    def print_num(self):
+        x = (self._lock_even, self._lock_odd) if self._is_index_even() else (self._lock_odd, self._lock_even)
         while True:
-            with self._lock:
-                if only_odd != self._is_index_even():  # true in case the "even" thread try process even index
-                    self._lock_your_turn.acquire()
-                if self._lock_your_turn.locked():
-                    print(self.index, text)
-                    self.index += 1
-                    self._lock_your_turn.release()
-
+            self._do_logic(*x)
             if self.index >= self._limit:
                 break
 
     def _is_index_even(self):
         return self.index % 2 == 0
 
+    def _do_logic(self, lock1: threading.Lock, lock2: threading.Lock):
+        lock1.acquire()
+        print(self.index, threading.get_ident())
+        self.index += 1
+        lock2.release()
+
 
 if __name__ == '__main__':
     sync_printer = NumberPrinter(100, start_with=43)
-    t1 = threading.Thread(target=sync_printer.print_num, args=("odd",), kwargs={"only_odd": True})
-    t2 = threading.Thread(target=sync_printer.print_num, args=("even",), kwargs={"only_odd": False})
+    t1 = threading.Thread(target=sync_printer.print_num)
+    t2 = threading.Thread(target=sync_printer.print_num)
     [threading.Thread.start(obj) for obj in [t1, t2]]
     [threading.Thread.join(obj) for obj in [t1, t2]]
