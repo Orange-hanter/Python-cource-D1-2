@@ -10,27 +10,25 @@ class NumberPrinter:
 
         self._lock_even = threading.Lock()
         self._lock_odd = threading.Lock()
-        (self._lock_odd if self._is_index_even() else self._lock_even).acquire()
+        self._lock_odd.acquire()
 
     def print_num(self):
-        x = (self._lock_even, self._lock_odd) if self._is_index_even() else (self._lock_odd, self._lock_even)
+        l2, l1 = (self._lock_even, self._lock_odd) if self._lock_even.locked() else (self._lock_odd, self._lock_even)
         while True:
-            self._do_logic(*x)
+            l1.acquire()
+            print(self.index, threading.get_ident())
+            self.index += 1
+            l2.release()
+
             if self.index >= self._limit:
                 break
 
     def _is_index_even(self):
         return self.index % 2 == 0
 
-    def _do_logic(self, lock1: threading.Lock, lock2: threading.Lock):
-        lock1.acquire()
-        print(self.index, threading.get_ident())
-        self.index += 1
-        lock2.release()
-
 
 if __name__ == '__main__':
-    sync_printer = NumberPrinter(100, start_with=43)
+    sync_printer = NumberPrinter(100, start_with=41)
     t1 = threading.Thread(target=sync_printer.print_num)
     t2 = threading.Thread(target=sync_printer.print_num)
     [threading.Thread.start(obj) for obj in [t1, t2]]
