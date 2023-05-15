@@ -15,7 +15,7 @@ class NumberPrinter:
     def print_even(self):
         while True:
             self._event_1.wait()
-            print(self._index)
+            print(self._index, 'e')
             self._index += 1
             self._event_1.clear()
             self._event_2.set()
@@ -24,7 +24,7 @@ class NumberPrinter:
     def print_odd(self):
         while True:
             self._event_2.wait()
-            print(self._index)
+            print(self._index, 'o')
             self._index += 1
             self._event_2.clear()
             self._event_1.set()

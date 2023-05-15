@@ -21,7 +21,7 @@ class NumberPrinter:
 
 
 if __name__ == '__main__':
-    sync_printer = NumberPrinter(100, start_with=1)
+    sync_printer = NumberPrinter(1_000_000, start_with=0)
     lock_1 = threading.Lock()
     lock_2 = threading.Lock()
     lock_2.acquire()
