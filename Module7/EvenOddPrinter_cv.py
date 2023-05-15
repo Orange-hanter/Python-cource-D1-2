@@ -1,4 +1,6 @@
 import threading
+from functools import partial
+from typing import Callable
 
 
 class NumberPrinter:
@@ -9,10 +11,10 @@ class NumberPrinter:
         self.__index = start_with
         self.__cv_1 = threading.Condition()
 
-    def print_num(self, predicate):
+    def print_num(self, predicate: Callable[[int], bool]):
         while True:
             with self.__cv_1:
-                self.__cv_1.wait_for(predicate)
+                self.__cv_1.wait_for(lambda: predicate(self.__index))
                 self.__business_logic()
                 self.__cv_1.notify()
 
@@ -24,14 +26,11 @@ class NumberPrinter:
         print(self.__index)
         self.__index += 1
 
-    def is_index_even(self):
-        return self.__index % 2 == 0
-
 
 if __name__ == '__main__':
     sync_printer = NumberPrinter(1_000_000, start_with=0)
-    first_thread = threading.Thread(target=sync_printer.print_num, args=(lambda: not sync_printer.is_index_even(),))
-    second_thread = threading.Thread(target=sync_printer.print_num, args=(sync_printer.is_index_even,))
+    first_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: x % 2 == 0,))
+    second_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: not x % 2 == 0,))
     first_thread.start()
     second_thread.start()
 
