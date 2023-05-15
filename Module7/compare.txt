@@ -1,0 +1,9 @@
+EvenOddPrinter.py
+real    0m7.590s
+user    0m4.647s
+sys     0m1.788s
+
+EvenOddPrinter_v2.py
+real    0m7.404s
+user    0m2.060s
+sys     0m2.046s
