@@ -8,14 +8,7 @@ class NumberPrinter:
         self._limit = max_num
         self.index = start_with
 
-        self._lock_1 = threading.Lock()
-        self._lock_2 = threading.Lock()
-
-    def print_num(self):
-        self._lock_2.acquire()
-        l1, l2 = (self._lock_1, self._lock_2) if not self._lock_1.locked() else (self._lock_2, self._lock_1)
-        if self._lock_1.locked():
-            self._lock_2.release()
+    def __call__(self, l1: threading.Lock, l2: threading.Lock):
         while True:
             l1.acquire()
             print(self.index)
@@ -29,8 +22,11 @@ class NumberPrinter:
 
 if __name__ == '__main__':
     sync_printer = NumberPrinter(100, start_with=1)
-    t1 = threading.Thread(target=sync_printer.print_num)
-    t2 = threading.Thread(target=sync_printer.print_num)
+    lock_1 = threading.Lock()
+    lock_2 = threading.Lock()
+    lock_2.acquire()
+    t1 = threading.Thread(target=sync_printer, args=(lock_1, lock_2))
+    t2 = threading.Thread(target=sync_printer, args=(lock_2, lock_1))
     t1.start()
     t2.start()
     t1.join()
