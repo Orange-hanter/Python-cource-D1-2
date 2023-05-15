@@ -8,12 +8,8 @@ class NumberPrinter:
         self.__limit = max_num
         self.__index = start_with
         self.__cv_1 = threading.Condition()
-        self.__predicate_stack = [lambda: self.__index % 2 == 0, lambda: not self.__index % 2 == 0]
 
-    def __call__(self):
-        self.__even_printer(self.__predicate_stack.pop())
-
-    def __even_printer(self, predicate: callable):
+    def print_num(self, predicate):
         while True:
             with self.__cv_1:
                 self.__cv_1.wait_for(predicate)
@@ -28,12 +24,16 @@ class NumberPrinter:
         print(self.__index)
         self.__index += 1
 
+    def is_index_even(self):
+        return self.__index % 2 == 0
+
 
 if __name__ == '__main__':
     sync_printer = NumberPrinter(1_000_000, start_with=0)
-    t1 = threading.Thread(target=sync_printer)
-    t2 = threading.Thread(target=sync_printer)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
+    first_thread = threading.Thread(target=sync_printer.print_num, args=(lambda: not sync_printer.is_index_even(),))
+    second_thread = threading.Thread(target=sync_printer.print_num, args=(sync_printer.is_index_even,))
+    first_thread.start()
+    second_thread.start()
+
+    first_thread.join()
+    second_thread.join()
