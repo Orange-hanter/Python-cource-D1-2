@@ -12,9 +12,10 @@ class NumberPrinter:
         self.__cv_1 = threading.Condition()
 
     def print_num(self, predicate: Callable[[int], bool]):
+        _predicate = lambda: predicate(self.__index)
         while True:
             with self.__cv_1:
-                self.__cv_1.wait_for(lambda: predicate(self.__index))
+                self.__cv_1.wait_for(_predicate)
                 self.__business_logic()
                 self.__cv_1.notify()
 
@@ -29,8 +30,8 @@ class NumberPrinter:
 
 if __name__ == '__main__':
     sync_printer = NumberPrinter(1_000_000, start_with=0)
-    first_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: x % 2 == 0,))
-    second_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: not x % 2 == 0,))
+    first_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: not x % 2 == 0,))
+    second_thread = threading.Thread(target=sync_printer.print_num, args=(lambda x: x % 2 == 0,))
     first_thread.start()
     second_thread.start()
 

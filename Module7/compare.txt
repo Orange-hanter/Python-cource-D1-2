@@ -13,3 +13,7 @@ real    0m7.554s
 user    0m3.949s
 sys     0m2.205s
 
+EvenOddPrinter_mp.py
+real    0m7.649s
+user    0m2.454s
+sys     0m2.276s
