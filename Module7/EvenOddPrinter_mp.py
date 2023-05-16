@@ -1,4 +1,4 @@
-from multiprocessing import Process, Lock, Value, Pool
+from multiprocessing import Process, Lock, Value
 
 
 def print_num(index: Value, l1: Lock, l2: Lock):
