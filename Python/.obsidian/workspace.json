@@ -8,24 +8,24 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3d9752c631c9a364",
+            "id": "86fe7c9067c4b9ba",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Module 6/Topics.md",
+                "file": "TuserDuser/Требования.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "86fe7c9067c4b9ba",
+            "id": "2881a633608c6e1b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Module 6/example.md",
+                "file": "Module 5/Topics.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,6 +77,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "6caa68b915e8a786",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -98,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Module 6/example.md",
+                "file": "Module 5/Topics.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Module 6/example.md",
+                "file": "Module 5/Topics.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Module 6/example.md"
+                "file": "Module 5/Topics.md"
               }
             }
           }
@@ -159,35 +167,36 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "86fe7c9067c4b9ba",
+  "active": "2881a633608c6e1b",
   "lastOpenFiles": [
-    "Module 6/Topics.md",
-    "Module 6/example.md",
-    "Module 6/Untitled.md",
-    "TuserDuser/Требования.md",
-    "Module 5/Topics.md",
-    "Module 6",
-    "Module 5/Dunder methots __XXattrXX__.md",
+    "Module 5/QnA.md",
     "Module 5/MRO.md",
     "Module 5/OOP Principels.md",
-    "Module 5/QnA.md",
-    "Module 5/__repr__ vs __str__.md",
-    "Module 3/Linux Task.md",
-    "Module 4/QnA.md",
-    "Module 5",
+    "Module 5/Dunder methots __XXattrXX__.md",
     "Module 4/Functional methods.md",
-    "Module 4/Code examples.md",
-    "Module 3/Questions.md",
-    "Module 3/QnA.md",
-    "Module 3/Hit an tric.md",
-    "Module 3/Linux.md",
-    "Module 3/Reslution of names.md",
-    "Module 2/Questions.md",
     "Module 4/Topics.md",
-    "Module 3/Tasks.md",
-    "Module 2/QnA.md",
+    "Module 4/QnA.md",
+    "Module 3/Questions.md",
+    "Module 3/Reslution of names.md",
+    "Module 3/QnA.md",
+    "Module 2/Questions.md",
     "Module 2/Mutable - Immutable.md",
-    "2023-02-27.md",
+    "Module 2/Hash and hashable.md",
+    "Module 1/First module.md",
+    "Module 1/PythonVirtualMachine+bytecode.md",
+    "Module 1/Python program execution flow.md",
+    "Module 1/PYC.md",
+    "Module 7/Garbage collector.md",
+    "Module 7/GIL.md",
+    "Module 7/Topics.md",
+    "Module 7/Threads and Procesess.md",
+    "Module 7/Sinchronization primitives.md",
+    "Module 7/Memory managment.md",
+    "Module 6/Topics.md",
+    "Module 6/Namespace package.md",
+    "TuserDuser/Требования.md",
+    "Module 6",
+    "Module 5",
     "Untitled.canvas",
     "Untitled 1.canvas"
   ]

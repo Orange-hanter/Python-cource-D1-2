@@ -1,6 +1,6 @@
 дикт нельзя хешировать, ключи это и есть хеши
 
-hashable[](https://docs.python.org/3.11/glossary.html#term-hashable "Permalink to this term")
+### [hashable](https://docs.python.org/3.11/glossary.html#term-hashable "Permalink to this term")
 
 An object is _hashable_ if it has a hash value which never changes during its lifetime (it needs a `__hash__()` method), and can be compared to other objects (it needs an `__eq__()` method). Hashable objects which compare equal must have the same hash value.
 
